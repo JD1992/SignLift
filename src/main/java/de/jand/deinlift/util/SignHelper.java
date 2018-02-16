@@ -1,4 +1,4 @@
-package bz.dcr.deinlift.Util;
+package de.jand.deinlift.util;
 
 import org.bukkit.Location;
 /**
