@@ -1,0 +1,8 @@
+name: deinLift
+version: ${project.version}
+main: bz.dcr.deinlift.DeinLift
+author: JD1992
+commands:
+  deinlift:
+    description: Hauptcommand für das Plugin
+    usage: /deinlift <up/down/cancel>
