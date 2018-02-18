@@ -1,10 +1,10 @@
 package de.jand.deinlift.listener;
 
 import de.jand.deinlift.DeinLift;
+import de.jand.deinlift.util.Constants;
 import de.jand.deinlift.util.SignHelper;
 import javafx.util.Pair;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -41,15 +41,15 @@ public class ClickListener implements Listener {
 			}
 			if ( ! this.plugin.getSignConfig().contains( key ) ) { return; }
 			if ( event.getAction() == Action.LEFT_CLICK_BLOCK
-			     && this.plugin.getSignConfig().contains( key + ".up" ) ) {
-				Location loc = ( Location ) this.plugin.getSignConfig().get( key + ".up" );
+			     && this.plugin.getSignConfig().contains( key + Constants.Value.UP ) ) {
+				Location loc = ( Location ) this.plugin.getSignConfig().get( key + Constants.Value.UP );
 				Bukkit.getScheduler().runTaskLater( this.plugin,
-						() -> player.teleport( loc ), 3L );
+						() -> player.teleport( loc ), Constants.Value.TP_WAIT );
 			} else if ( event.getAction() == Action.RIGHT_CLICK_BLOCK
-			            && this.plugin.getSignConfig().contains( key + ".down" ) ) {
-				Location loc = ( Location ) this.plugin.getSignConfig().get( key + ".down" );
+			            && this.plugin.getSignConfig().contains( key + Constants.Value.DOWN ) ) {
+				Location loc = ( Location ) this.plugin.getSignConfig().get( key + Constants.Value.DOWN );
 				Bukkit.getScheduler().runTaskLater( plugin,
-						() -> player.teleport( loc ), 3L );
+						() -> player.teleport( loc ), Constants.Value.TP_WAIT );
 			}
 			event.setCancelled( true );
 		}
@@ -58,34 +58,37 @@ public class ClickListener implements Listener {
 	private void configureSignState ( Player player, String key, Sign s ) {
 		Pair < Location, Boolean > state = this.plugin.getLiftLocation().get( player );
 		if ( state.getKey() != null ) {
-			s.setLine( 0, ChatColor.translateAlternateColorCodes( '&', this.plugin.getConfiguration().getString( "config.sign.line.0" ) ) );
-			s.setLine( 1, ChatColor.translateAlternateColorCodes( '&', this.plugin.getConfiguration().getString( "config.sign.line.1" ) ) );
+			s.setLine( 0, this.plugin.getConfigHandler().getConfigStringFormatted( Constants.Plugin.Config.SIGN_LINE_0 ) );
+			s.setLine( 1, this.plugin.getConfigHandler().getConfigStringFormatted( Constants.Plugin.Config.SIGN_LINE_1 ) );
 			if ( state.getValue() ) {
-				this.plugin.getSignConfig().set( key + ".up", state.getKey() );
-				this.plugin.sendConfigMessage( player, "plugin.message.up.set" );
-				s.setLine( 2, ChatColor.translateAlternateColorCodes( '&', this.plugin.getConfiguration().getString( "config.sign.line.2" ) ) );
+				this.plugin.getSignConfig().set( key + Constants.Value.UP, state.getKey() );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.UP_SET );
+				
+				s.setLine( 2, this.plugin.getConfigHandler().getConfigStringFormatted( Constants.Plugin.Config.SIGN_LINE_2 ) );
 			} else {
-				this.plugin.getSignConfig().set( key + ".down", state.getKey() );
-				this.plugin.sendConfigMessage( player, "plugin.message.down.set" );
-				s.setLine( 3, ChatColor.translateAlternateColorCodes( '&', this.plugin.getConfiguration().getString( "config.sign.line.3" ) ) );
+				this.plugin.getSignConfig().set( key + Constants.Value.DOWN, state.getKey() );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.DOWN_SET );
+				
+				s.setLine( 3, this.plugin.getConfigHandler().getConfigStringFormatted( Constants.Plugin.Config.SIGN_LINE_3 ) );
 			}
 			this.plugin.getLiftLocation().remove( player );
 		} else {
 			if ( this.plugin.getSignConfig().contains( key ) ) {
 				this.plugin.getSignConfig().set( key, null );
-				s.setLine( 0, "" );
-				s.setLine( 1, "" );
-				s.setLine( 2, "" );
-				s.setLine( 3, "" );
+				String clearedText = "";
+				s.setLine( 0, clearedText );
+				s.setLine( 1, clearedText );
+				s.setLine( 2, clearedText );
+				s.setLine( 3, clearedText );
 			}
 			this.plugin.getLiftLocation().remove( player );
-			this.plugin.sendConfigMessage( player, "plugin.message.deleted" );
+			this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.DELETED );
 			
 		}
 		try {
 			this.plugin.getSignConfig().save( this.plugin.getSignFile() );
 		} catch ( IOException e ) {
-			e.printStackTrace();
+			this.plugin.getMessageHandler().log( e );
 		}
 		
 	}

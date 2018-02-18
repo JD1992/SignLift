@@ -6,6 +6,10 @@ import org.bukkit.Location;
  */
 public class SignHelper {
 	
+	private SignHelper () {
+		throw new IllegalStateException( Constants.STATE_WARNING );
+	}
+	
 	public static String convertLocationToKey ( Location location ) {
 		String key = "world=" + location.getWorld().getName();
 		key += ",x=" + location.getBlockX();

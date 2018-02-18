@@ -1,6 +1,7 @@
 package de.jand.deinlift.command;
 
 import de.jand.deinlift.DeinLift;
+import de.jand.deinlift.util.Constants;
 import javafx.util.Pair;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,14 +22,14 @@ public class CommandDeinLift implements CommandExecutor {
 	public boolean onCommand ( CommandSender sender, Command command, String label, String[] args ) {
 		if ( ! ( sender instanceof Player ) ) { return true; }
 		Player player = ( Player ) sender;
-		if ( ! ( player.hasPermission( "deinlift.admin" ) ) ) { return true; }
+		if ( ! ( player.hasPermission( Constants.Permission.ADMIN ) ) ) { return true; }
 		
 		if ( args.length == 0 ) {
-			this.plugin.sendPluginMessage( player, "&cBenutzung: &adeinlift <up/down/cancel/delete>" );
-			this.plugin.sendPluginMessage( player, "&aup &c- &eAn der Position die für eine Lift-Hoch Position gesetzt werden soll" );
-			this.plugin.sendPluginMessage( player, "&adown &c- &eAn der Position die für eine Lift-Runter Position gesetzt werden soll" );
-			this.plugin.sendPluginMessage( player, "&acancel &c- &eup/down Position verwerfen" );
-			this.plugin.sendPluginMessage( player, "&adelete &c- &eSchild löschen" );
+			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.GENERAL);
+			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.UP);
+			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.DOWN);
+			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.CANCEL);
+			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.DELETE);
 			return true;
 		}
 		
@@ -36,7 +37,7 @@ public class CommandDeinLift implements CommandExecutor {
 			case "cancel":
 				if ( this.plugin.getLiftLocation().containsKey( player ) ) {
 					this.plugin.getLiftLocation().remove( player );
-					this.plugin.sendConfigMessage( player, "plugin.message.cancel" );
+					this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.CANCEL );
 				}
 				break;
 			case "delete":
@@ -45,19 +46,19 @@ public class CommandDeinLift implements CommandExecutor {
 				} else {
 					this.plugin.getLiftLocation().put( player, new Pair <>( null, true ) );
 				}
-				this.plugin.sendConfigMessage( player, "plugin.message.delete" );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.DELETE );
 				break;
 			case "up":
 				this.plugin.getLiftLocation().put( player, new Pair <>( player.getLocation(), true ) );
-				this.plugin.sendConfigMessage( player, "plugin.message.up.save" );
-				this.plugin.sendConfigMessage( player, "plugin.message.declaration" );
-				this.plugin.sendConfigMessage( player, "plugin.message.override" );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.UP_SAVE );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.DECLARATION );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.OVERRIDE );
 				break;
 			case "down":
 				this.plugin.getLiftLocation().put( player, new Pair <>( player.getLocation(), false ) );
-				this.plugin.sendConfigMessage( player, "plugin.message.down.save" );
-				this.plugin.sendConfigMessage( player, "plugin.message.declaration" );
-				this.plugin.sendConfigMessage( player, "plugin.message.override" );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.DOWN_SAVE );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.DECLARATION );
+				this.plugin.getMessageHandler().sendConfigMessage( player, Constants.Message.OVERRIDE );
 				break;
 			default:
 				return false;
