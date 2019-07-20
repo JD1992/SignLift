@@ -1,4 +1,4 @@
-package de.jand.deinlift.util;
+package me.jd1992.signlift.util;
 
 /**
  * This class contains every constant value, config nodes and permissions
@@ -93,9 +93,9 @@ public final class Constants {
 		}
 		
 		
-		public final class DeinLift {
+		public final class SignLift {
 			
-			private DeinLift () {
+			private SignLift () {
 				throw new IllegalStateException( STATE_WARNING );
 			}
 			
@@ -105,7 +105,7 @@ public final class Constants {
 					throw new IllegalStateException( STATE_WARNING );
 				}
 				
-				public static final String GENERAL = "&cBenutzung: &adeinlift <up/down/cancel/delete>";
+				public static final String GENERAL = "&cBenutzung: &asignlift <up/down/cancel/delete>";
 				public static final String UP = "&aup &c- &eAn der Position die für eine Lift-Hoch Position gesetzt werden soll";
 				public static final String DOWN = "&adown &c- &eAn der Position die für eine Lift-Runter Position gesetzt werden soll";
 				public static final String CANCEL = "&acancel &c- &eup/down Position verwerfen";

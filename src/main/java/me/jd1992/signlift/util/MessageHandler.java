@@ -1,4 +1,4 @@
-package de.jand.deinlift.util;
+package me.jd1992.signlift.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

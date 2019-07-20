@@ -1,4 +1,4 @@
-package de.jand.deinlift.util;
+package me.jd1992.signlift.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -32,10 +32,10 @@ public class ConfigHandler {
 	 */
 	private void setDefaultPermissions () {
 		
-		this.config.addDefault( Constants.Permission.ADMIN, "deinlift.admin" );
-		this.config.addDefault( Constants.Permission.TEAM, "deinlift.team" );
-		this.config.addDefault( Constants.Permission.CREATE, "deinlift.create" );
-		this.config.addDefault( Constants.Permission.USE, "deinlift.use" );
+		this.config.addDefault( Constants.Permission.ADMIN, "signlift.admin" );
+		this.config.addDefault( Constants.Permission.TEAM, "signlift.team" );
+		this.config.addDefault( Constants.Permission.CREATE, "signlift.create" );
+		this.config.addDefault( Constants.Permission.USE, "signlift.use" );
 		
 	}
 	
@@ -44,11 +44,11 @@ public class ConfigHandler {
 	 */
 	private void setDefaultValues () {
 		
-		this.config.addDefault( Constants.Plugin.Prefix.CONSOLE, "[deinLift]" );
-		this.config.addDefault( Constants.Plugin.Prefix.INGAME, "&6&o&ldeinLift&8>" );
+		this.config.addDefault( Constants.Plugin.Prefix.CONSOLE, "[SignLift]" );
+		this.config.addDefault( Constants.Plugin.Prefix.INGAME, "&6&o&lSignLift&8>" );
 		
 		
-		this.config.addDefault( Constants.Plugin.Config.SIGN_LINE_0, "&c[&9dein&6Lift&c]" );
+		this.config.addDefault( Constants.Plugin.Config.SIGN_LINE_0, "&c[&Sign&6Lift&c]" );
 		this.config.addDefault( Constants.Plugin.Config.SIGN_LINE_1, "" );
 		this.config.addDefault( Constants.Plugin.Config.SIGN_LINE_2, "&l⬆ Linksklick ⬆" );
 		this.config.addDefault( Constants.Plugin.Config.SIGN_LINE_3, "&l⬇ Rechtsklick ⬇" );

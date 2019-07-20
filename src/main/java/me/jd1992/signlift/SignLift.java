@@ -1,9 +1,9 @@
-package de.jand.deinlift;
+package me.jd1992.signlift;
 
-import de.jand.deinlift.command.CommandDeinLift;
-import de.jand.deinlift.listener.ClickListener;
-import de.jand.deinlift.util.ConfigHandler;
-import de.jand.deinlift.util.MessageHandler;
+import me.jd1992.signlift.command.SignLiftCommand;
+import me.jd1992.signlift.listener.ClickListener;
+import me.jd1992.signlift.util.ConfigHandler;
+import me.jd1992.signlift.util.MessageHandler;
 import javafx.util.Pair;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -16,14 +16,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public final class DeinLift extends JavaPlugin implements Listener {
+public final class SignLift extends JavaPlugin implements Listener {
 	
 	private @Getter File signFile;
 	private @Getter YamlConfiguration signConfig;
 	
 	private @Getter HashMap < Player, Pair < Location, Boolean > > liftLocation;
-	private @Getter MessageHandler messageHandler;
-	private @Getter ConfigHandler configHandler;
+	private @Getter
+                    MessageHandler                                 messageHandler;
+	private @Getter
+                    ConfigHandler                                  configHandler;
 	
 	
 	@Override
@@ -68,11 +70,11 @@ public final class DeinLift extends JavaPlugin implements Listener {
 	}
 	
 	private void initListener () {
-		this.getServer().getPluginManager().registerEvents( new ClickListener( this ), this );
+		this.getServer().getPluginManager().registerEvents(new ClickListener(this ), this);
 	}
 	
 	private void initCommands () {
-		getCommand( "deinLift" ).setExecutor( new CommandDeinLift( this ) );
+		getCommand( "signLift" ).setExecutor( new SignLiftCommand(this ));
 	}
 	
 }

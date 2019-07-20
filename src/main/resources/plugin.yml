@@ -1,8 +1,8 @@
-name: deinLift
+name: SignLift
 version: ${project.version}
-main: bz.dcr.deinlift.DeinLift
+main: SignLift
 author: JD1992
 commands:
-  deinlift:
+  signlift:
     description: Hauptcommand für das Plugin
-    usage: /deinlift <up/down/cancel>
+    usage: /signlift <up/down/cancel>

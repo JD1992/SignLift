@@ -1,8 +1,8 @@
-package de.jand.deinlift.listener;
+package me.jd1992.signlift.listener;
 
-import de.jand.deinlift.DeinLift;
-import de.jand.deinlift.util.Constants;
-import de.jand.deinlift.util.SignHelper;
+import me.jd1992.signlift.SignLift;
+import me.jd1992.signlift.util.Constants;
+import me.jd1992.signlift.util.SignHelper;
 import javafx.util.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -19,9 +19,9 @@ import java.io.IOException;
  */
 public class ClickListener implements Listener {
 	
-	private final DeinLift plugin;
+	private final SignLift plugin;
 	
-	public ClickListener ( DeinLift plugin ) {
+	public ClickListener ( SignLift plugin) {
 		this.plugin = plugin;
 	}
 	

@@ -1,7 +1,6 @@
-package de.jand.deinlift.command;
+package me.jd1992.signlift.command;
 
-import de.jand.deinlift.DeinLift;
-import de.jand.deinlift.util.Constants;
+import me.jd1992.signlift.util.Constants;
 import javafx.util.Pair;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,11 +9,11 @@ import org.bukkit.entity.Player;
 /**
  * Created by Jan on 29.01.2017
  */
-public class CommandDeinLift implements CommandExecutor {
+public class SignLiftCommand implements CommandExecutor {
 	
-	private final DeinLift plugin;
+	private final me.jd1992.signlift.SignLift plugin;
 	
-	public CommandDeinLift ( DeinLift plugin ) {
+	public SignLiftCommand (me.jd1992.signlift.SignLift plugin) {
 		this.plugin = plugin;
 	}
 	
@@ -25,11 +24,11 @@ public class CommandDeinLift implements CommandExecutor {
 		if ( ! ( player.hasPermission( Constants.Permission.ADMIN ) ) ) { return true; }
 		
 		if ( args.length == 0 ) {
-			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.GENERAL);
-			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.UP);
-			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.DOWN);
-			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.CANCEL);
-			this.plugin.getMessageHandler().sendPluginMessage( player, Constants.Commands.DeinLift.Usage.DELETE);
+			this.plugin.getMessageHandler().sendPluginMessage(player, Constants.Commands.SignLift.Usage.GENERAL);
+			this.plugin.getMessageHandler().sendPluginMessage(player, Constants.Commands.SignLift.Usage.UP);
+			this.plugin.getMessageHandler().sendPluginMessage(player, Constants.Commands.SignLift.Usage.DOWN);
+			this.plugin.getMessageHandler().sendPluginMessage(player, Constants.Commands.SignLift.Usage.CANCEL);
+			this.plugin.getMessageHandler().sendPluginMessage(player, Constants.Commands.SignLift.Usage.DELETE);
 			return true;
 		}
 		
